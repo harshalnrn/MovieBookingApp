@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './Home.css';
-
+import Header from '../common/Header.js'
 class Home extends Component {
 
 
@@ -11,7 +11,7 @@ class Home extends Component {
 
         return(
             <div>
-
+<Header/>
             </div>
         )
     }

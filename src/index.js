@@ -1,6 +1,7 @@
 import React from 'react';            //'react is a package'
 import ReactDOM from 'react-dom';     //react-dom is a package
 import './index.css';
+import Home from './screens/Home.js'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Home/>, document.getElementById('root'));
