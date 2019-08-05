@@ -27,13 +27,13 @@ this.setState({modalIsOpen:true})
         this.setState({modalIsOpen:false})
     }
 
-    tabChangeHandler=(event,value)=>{
-        console.log(value);
-        this.setState({ value });
+    tabChangeHandler=(event,position)=>{
+        console.log(position);
+        this.setState({ value:position });
 }
 
 render(){
-    return(<div >
+    return(<div class="mainContainer">
         <header className="header">
         <img src={logo} className="app-logo" alt="logo"></img>
     <Button variant="contained" className="login-button" onClick={this.openModalHandler}>  {/*  we directly import ready-made button element as component from materialUI library */}
@@ -41,13 +41,15 @@ render(){
     </Button>
     </header>
     {/* display of modal is controlled via modalIsopen attribute */}
-    <Modal ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" onRequestClose={this.closeModal}>
+    <Modal ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" onRequestClose={this.closeModal} className="loginRegModal">
     <Tabs value={this.state.value} onChange={this.tabChangeHandler}>
-                        <Tab label="Login" />
-                        <Tab label="Register" />
+                        <Tab label="Login" />   {/* position 0 */}
+                        <Tab label="Register" />  {/*  position1 */}
                     </Tabs>
 
-                    {/* not understanding how 'value' is being manipulated and sent to onChange event handler */}
+                    {/* Here onChange event handler for the Tabs,sets the state of value to 0 or 1, based upon position passed.
+                    So is position an inbuilt property of Tab component*/}
+            
         </Modal>
     </div>);
 }

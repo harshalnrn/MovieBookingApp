@@ -13,6 +13,17 @@ padding: 8px 32px 8px 16px;
     height: 35px;
     background: #ff7f7f;
  }
+ .mainContainer{
+
+    
+ }
+ .loginRegModal{
+ width:25%;
+  margin:auto;
+  margin-top: 25%;
+  margin-bottom: 25%;
+  padding: 1%;
+ }
  
  @keyframes app-logo-spin {
     from { transform: scaleX(-1); }
