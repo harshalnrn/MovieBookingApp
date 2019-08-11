@@ -35,3 +35,11 @@ padding: 8px 32px 8px 16px;
  @keyframes app-logo-spin {
     from { transform: scaleX(-1); }
  }
+
+ .tabs{
+     margin:15px;
+ }
+
+ .formContainer{
+     margin:auto;
+ }

@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import { textAlign } from '@material-ui/system';
 
 //making use of styled JSX elements, in form of ready  components, from materialUI library
 
@@ -31,9 +32,9 @@ content:{
 //below is stateless functional typrography component
 
 const TabContainer=function(props){
-
+//note the styling priority : inline>internal>external
     return (
-    <Typography component="div" style={{padding:0}} >
+    <Typography component="div" style={{padding:0,textAlign:'center'}}>
 {props.children}
 
     </Typography>    /* note that inline styling has {{}} */
@@ -85,27 +86,29 @@ render(){
     Login
     </Button>
     </header>
+    
     {/* display of modal is controlled via modalIsopen attribute, similar to display attribute in html/css */}
     <Modal ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" onRequestClose={this.closeModal} style={customStyles}>
-    <Tabs value={this.state.value} onChange={this.tabChangeHandler}>
+    <Tabs className="tabs" value={this.state.value} onChange={this.tabChangeHandler}>  {/* change of position */}
                         <Tab label="Login" />   {/* position 0 */}
                         <Tab label="Register"/>  {/*  position1 */}
                         
                     </Tabs>
 
-                    {/* Here onChange event handler for the Tabs,sets the state of value to 0 or 1, based upon position passed.
-                    So is position an inbuilt property of Tab component*/}
+{/* Here onChange event handler for the Tabs,sets the state of value to 0 or 1, based upon position passed.
+So is position an inbuilt property of Tab component*/}
 
 <TabContainer>
 <FormControl>
-<InputLabel htmlFor="username"> UserName</InputLabel>
+<InputLabel htmlFor="username" > UserName</InputLabel>
 <Input id="username" type="text"/>
 </FormControl>
 <br/>
 <FormControl>
 <InputLabel htmlFor="password"> Password </InputLabel>
 <Input id="password" type="text"/>
-</FormControl>
+</FormControl> <br/><br/>
+<Button variant="contained" color="primary">LOGIN</Button>
 </TabContainer>
 
             
