@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import { textAlign } from '@material-ui/system';
+import PropTypes from 'prop-types';
 
 //making use of styled JSX elements, in form of ready  components, from materialUI library
 
@@ -41,6 +41,12 @@ const TabContainer=function(props){
     
     );
 
+}
+
+//we validate if tabContainer component always have children elements or not
+//PropTypes required for inbuilt typeChecking of data
+TabContainer.propTypes={
+    children:PropTypes.node.isRequired
 }
 
 
@@ -98,6 +104,8 @@ render(){
 {/* Here onChange event handler for the Tabs,sets the state of value to 0 or 1, based upon position passed.
 So is position an inbuilt property of Tab component*/}
 
+{this.state.value===0 &&
+
 <TabContainer>
 <FormControl>
 <InputLabel htmlFor="username" > UserName</InputLabel>
@@ -110,7 +118,7 @@ So is position an inbuilt property of Tab component*/}
 </FormControl> <br/><br/>
 <Button variant="contained" color="primary">LOGIN</Button>
 </TabContainer>
-
+}
             
         </Modal>
     </div>);
