@@ -17,12 +17,19 @@ padding: 8px 32px 8px 16px;
 
     
  }
+
+ /* dbt: when to go for %(relative) and when for px(absolute) */
+ /* Also here the dimensions are fixed and does not dynamically resize with inner content growing*/
  .loginRegModal{
- width:25%;
+
+
+ /* width:25%;
   margin:auto;
   margin-top: 25%;
   margin-bottom: 25%;
-  padding: 1%;
+  padding: 1%; */
+
+
  }
  
  @keyframes app-logo-spin {
