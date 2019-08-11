@@ -10,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import PropTypes from 'prop-types';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 //making use of styled JSX elements, in form of ready  components, from materialUI library
 
@@ -59,7 +60,11 @@ super();
 //dynamic members is initialised within state
 this.state={
     modalIsOpen:false,
-    value:0
+    value:0,
+    userName:"",
+    passWord:"",
+    userNameRequired:"dispNone",
+    passWordRequired:"dispNone"
 }
         
     }
@@ -83,6 +88,29 @@ this.setState({modalIsOpen:true})
        // note: this value controls the display of underlining line on the tab
 }
 
+loginClickHandler=()=>{
+//validate and update display state
+//doubt: where are we setting userName field of state object, with form input's text value ??
+this.state.userName===""? this.setState({userNameRequired:"dispBlock"}):
+this.setState({userNameRequired:"dispNone"});
+
+this.state.passWord===""? this.setState({passWordRequired:"dispBlock"}):
+this.setState({passWordRequired:"dispNone"});
+
+
+}
+
+
+inputUserNameChangeHandler=(e)=>{
+    this.setState({userName:e.target.value});
+
+}
+
+inputPasswordChangeHandler=(e)=>{
+    this.setState({passWord:e.target.value});
+
+}
+
 //---------------------------------------------
 render(){
     return(<div class="mainContainer">
@@ -103,22 +131,49 @@ render(){
 
 {/* Here onChange event handler for the Tabs,sets the state of value to 0 or 1, based upon position passed.
 So is position an inbuilt property of Tab component*/}
-
+{/* using state for conditional rendering of both tab change, forms */}
 {this.state.value===0 &&
 
 <TabContainer>
 <FormControl>
 <InputLabel htmlFor="username" > UserName</InputLabel>
-<Input id="username" type="text"/>
+<Input id="username" type="text" username={this.state.userName} onChange={this.inputUserNameChangeHandler}/>
+<FormHelperText className={this.state.userNameRequired}><span className="red">Required</span></FormHelperText>
 </FormControl>
 <br/>
+
+
 <FormControl>
 <InputLabel htmlFor="password"> Password </InputLabel>
-<Input id="password" type="text"/>
+<Input id="password" type="text" password={this.state.passWord}    onChange={this.inputPasswordChangeHandler} />
+{/* below should be shown only after validation of input, post onClick event */}
+<FormHelperText className={this.state.passWordRequired}><span className="red">Required</span></FormHelperText>
 </FormControl> <br/><br/>
-<Button variant="contained" color="primary">LOGIN</Button>
+<Button variant="contained" color="primary" onClick={this.loginClickHandler}>LOGIN</Button>
 </TabContainer>
 }
+ 
+
+
+
+
+
+ {/* registeration form */}
+{this.state.value===1 &&
+
+    <TabContainer>
+    <FormControl>
+    <InputLabel > </InputLabel>
+    <Input id="" type="text"/>
+    </FormControl>
+    <br/>
+    <FormControl>
+    <InputLabel ></InputLabel>
+    <Input id="" type="text"/>
+    </FormControl> <br/><br/>
+    <Button variant="contained" color="primary">REGISTER</Button>
+    </TabContainer>
+    }
             
         </Modal>
     </div>);
