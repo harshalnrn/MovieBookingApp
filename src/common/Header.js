@@ -11,6 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import onClickOutside from 'react-onclickoutside';
 
 //making use of styled JSX elements, in form of ready  components, from materialUI library
 
@@ -90,30 +91,44 @@ this.setState({modalIsOpen:true})
 
 loginClickHandler=()=>{
 //validate and update display state
-//doubt: where are we setting userName field of state object, with form input's text value ??
+
 this.state.userName===""? this.setState({userNameRequired:"dispBlock"}):
 this.setState({userNameRequired:"dispNone"});
 
 this.state.passWord===""? this.setState({passWordRequired:"dispBlock"}):
 this.setState({passWordRequired:"dispNone"});
-
-
 }
 
 
+handleClickOutside=()=>{
+
+this.setState({userNameRequired:"dispNone",
+passWordRequired:"dispNone" });
+
+}
+
 inputUserNameChangeHandler=(e)=>{
+    //setting userName field of state object, with form input's text value
     this.setState({userName:e.target.value});
 
 }
 
+
+
 inputPasswordChangeHandler=(e)=>{
+    //setting password field of state object, with form input's text value
     this.setState({passWord:e.target.value});
+
 
 }
 
-//---------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------
 render(){
-    return(<div class="mainContainer">
+    return(
+    
+    <div class="mainContainer" >
+
+
         <header className="header">
         <img src={logo} className="app-logo" alt="logo"></img>
     <Button variant="contained" className="login-button" onClick={this.openModalHandler}>  {/*  we directly import ready-made button element as component from materialUI library */}
@@ -122,7 +137,8 @@ render(){
     </header>
     
     {/* display of modal is controlled via modalIsopen attribute, similar to display attribute in html/css */}
-    <Modal ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" onRequestClose={this.closeModal} style={customStyles}>
+
+    <Modal onClickOutside={this.outsideModalClickHandler} ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" onRequestClose={this.closeModal} style={customStyles}>
     <Tabs className="tabs" value={this.state.value} onChange={this.tabChangeHandler}>  {/* change of position */}
                         <Tab label="Login" />   {/* position 0 */}
                         <Tab label="Register"/>  {/*  position1 */}
@@ -180,5 +196,4 @@ So is position an inbuilt property of Tab component*/}
 }
 }
 
-
-export default Header
+export default onClickOutside(Header)
