@@ -103,7 +103,8 @@ this.setState({passWordRequired:"dispNone"});
 handleClickOutside=()=>{
 
 this.setState({userNameRequired:"dispNone",
-passWordRequired:"dispNone" });
+passWordRequired:"dispNone" ,
+value:0});
 
 }
 
