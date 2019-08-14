@@ -11,7 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import onClickOutside from 'react-onclickoutside';
+//import onClickOutside from 'react-onclickoutside';
 
 //making use of styled JSX elements, in form of ready  components, from materialUI library
 
@@ -32,13 +32,12 @@ content:{
 //---------------------------------------------------------
 
 //below is stateless functional typrography component
-
-const TabContainer=function(props){
 //note the styling priority : inline>internal>external
+const TabContainer=function(props){
+
     return (
     <Typography component="div" style={{padding:0,textAlign:'center'}}>
 {props.children}
-
     </Typography>    /* note that inline styling has {{}} */
     
     );
@@ -83,10 +82,19 @@ this.state={
     //----------------------------------------
 
     openModalHandler=()=>{
-this.setState({modalIsOpen:true})
+this.setState({modalIsOpen:true,
+    userNameRequired:"dispNone",
+    passWordRequired:"dispNone" ,
+    ReguserNameRequired:"dispNone",
+    RegpassWordRequired:"dispNone",
+    firstNameRequired:"dispNone",
+    lastNameRequired:"dispNone",
+    contactNoRequired:"dispNone",
+    
+    value:0})
     }
 
-    //--------------------------------
+    //--------------------------------get closed on click outside modal
     closeModal=()=>{
         this.setState({modalIsOpen:false})
     }
@@ -123,15 +131,15 @@ registerationClickHandler=()=>{
     this.state.firstName===""?this.setState({firstNameRequired:"dispBlock"}):
     this.setState({firstNameRequired:"dispNone"});
 
-    this.state.lastName===""?this.setState({lastNameRequired:"displBlock"}):
+    this.state.lastName===""?this.setState({lastNameRequired:"dispBlock"}):
     this.setState({lastNameRequired:"dispNone"});
 
-    this.state.contactNo===""?this.setState({contactNo:"dispBlock"}):
-    this.setState({contactNo:"dispNone"});
+    this.state.contactNo===""?this.setState({contactNoRequired:"dispBlock"}):
+    this.setState({contactNoRequired:"dispNone"});
 }
 
 
-handleClickOutside=()=>{
+/*  handleClickOutside=()=>{
 //exercize1,2 bug
 this.setState({userNameRequired:"dispNone",
 passWordRequired:"dispNone" ,
@@ -143,7 +151,7 @@ contactNoRequired:"dispNone",
 
 value:0});
 
-}
+}  */
 
 
 
@@ -209,8 +217,8 @@ render(){
     
     {/* display of modal is controlled via modalIsopen attribute, similar to display attribute in html/css */}
 
-    <Modal onClickOutside={this.outsideModalClickHandler} ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" onRequestClose={this.closeModal} style={customStyles}>
-    <Tabs className="tabs" value={this.state.value} onChange={this.tabChangeHandler}>  {/* change of position */}
+    <Modal ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" onRequestClose={this.closeModal} style={customStyles}>
+    <Tabs className="tabs" value={this.state.value} onChange={this.tabChangeHandler}>  {/* change of position Detected */}
                         <Tab label="Login" />   {/* position 0 */}
                         <Tab label="Register"/>  {/*  position1 */}
                         
@@ -219,6 +227,8 @@ render(){
 {/* Here onChange event handler for the Tabs,sets the state of value to 0 or 1, based upon position passed.
 So is position an inbuilt property of Tab component*/}
 {/* using state for conditional rendering of both tab change, forms */}
+
+
 {this.state.value===0 &&
 
 <TabContainer>
@@ -296,4 +306,5 @@ So is position an inbuilt property of Tab component*/}
 }
 }
 
-export default onClickOutside(Header)
+//export default onClickOutside(Header)//is the imported onClickOutside a functional componenent?
+export default Header;
