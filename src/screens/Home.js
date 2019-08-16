@@ -6,11 +6,12 @@ import movieData from '../common/movieData';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 const styles = theme => ({
     root: {
         flexGrow: 1,
-        backgroundColor: theme.palette.background.paper
+        backgroundColor: theme.palette.background.paper,
     },
     upcomingMoviesHeading: {
         textAlign: 'center',
@@ -22,6 +23,10 @@ const styles = theme => ({
         flexWrap: 'nowrap',
         transform: 'translateZ(0)',
         width: '100%'
+    },
+    gridListMain: {
+        transform: 'translateZ(0)',
+        cursor: 'pointer'
     }
 });
 
@@ -41,18 +46,42 @@ class Home extends Component {
 <Header/>
 <header className={classes.upcomingMoviesHeading}>Upcoming Movies</header>
 
-<GridList className={classes.gridListUpcomingMovies} cols={5}>
-                            {/* iterating throw map, to display each element/object in grid */}
+{/* add a flex row div  */}
+<div>
+<GridList cellHeight={350} cols ={5} className={classes.gridListUpcomingMovies}>
+                            {/* iterating throw map, to display each element/object in grid */}     
 {
+
     movieData.map(movie =>(
 
 <GridListTile key={movie.id}>                                    {/* remember why key is needed for each element within map */}
-   <img src={movie.poster_url} alt={movie.title}/>
+   <img className="movie-poster" src={movie.poster_url} alt={movie.title}/>
    <GridListTileBar title={movie.title}/>
 </GridListTile>
 ))}
 
 </GridList>
+</div>
+
+<br/>
+
+<div className="flex-container">
+                    <div className="left">
+<GridList cellHeight={350} cols ={3} className={classes.gridListMain}>
+                            {/* iterating throw map, to display each element/object in grid */}     
+{
+
+    movieData.map(movie =>(
+
+<GridListTile key={movie.id}>                                    {/* remember why key is needed for each element within map */}
+   <img className="movie-poster" src={movie.poster_url} alt={movie.title}/>
+   <GridListTileBar title={movie.title}/>
+</GridListTile>
+))}
+
+</GridList>
+</div>
+</div>
 </div>
         )
     }
