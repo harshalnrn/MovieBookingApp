@@ -6,8 +6,14 @@ import movieData from '../common/movieData';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import FormControl from '@material-ui/core/FormControl';
+import Typography from'@material-ui/core/Typography';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
 
+//didnt undetrstand the below styles constant and high level components
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -27,7 +33,15 @@ const styles = theme => ({
     gridListMain: {
         transform: 'translateZ(0)',
         cursor: 'pointer'
-    }
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 240,
+        maxWidth: 240
+     },
+     title: {
+        color: theme.palette.primary.light,
+     }
 });
 
 
@@ -35,6 +49,28 @@ const styles = theme => ({
 
 
 class Home extends Component {
+
+constructor(){
+super();
+    this.state={
+movieName:""
+
+    }
+}
+
+
+movieNameChangeHandler=(e)=>{
+
+  this.setState({
+      movieData:e.target.value
+  });
+
+
+}
+
+
+
+
     render(){
         const {
             classes
@@ -80,6 +116,23 @@ class Home extends Component {
 ))}
 
 </GridList>
+</div>
+<div className="right">
+<Card>
+<CardContent>
+<FormControl className={classes.formControl}>
+<Typography className={classes.title} colors="textSecondary">
+Find Movies By :
+</Typography>
+</FormControl>
+
+
+<FormControl className={classes.formControl}>
+<InputLabel htmlFor="movieName">Movie Name</InputLabel>
+<Input id="movieName" onChange={this.movieNameChangeHandler}></Input>
+</FormControl>
+</CardContent>
+</Card>
 </div>
 </div>
 </div>
