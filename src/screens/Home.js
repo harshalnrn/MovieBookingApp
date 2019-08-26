@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import './Home.css';
 import genres from  '../common/genres.js';
+import artists from '../common/artists.js';
 import Header from '../common/Header.js';
 import {withStyles} from '@material-ui/core/styles';
 import movieData from '../common/movieData';
@@ -59,7 +60,8 @@ super();
     this.state={
 movieName:"",
 movieGenreName:"",
-genres: []
+genres: [],
+artists:[]
     }
 }
 
@@ -72,14 +74,23 @@ movieNameChangeHandler=(e)=>{
   });
 }
 
-//event handler for drop down select list
+//event handler for drop down select list of genres
 genreSelectHandler= e =>{
     console.log("inside genre select Handler");
    this.setState({
        genres:e.target.value
    });
 }
+//event handler for drop-down select list of artists
 
+artistSelectHandler= e =>{
+    console.log("inside genre select Handler");
+    console.log(e.target.value);
+   this.setState({
+       
+    artists:e.target.value
+   });
+}
 
 
     render(){
@@ -177,6 +188,32 @@ onChange={this.genreSelectHandler}
 </Select>
 </FormControl>
 
+
+
+
+
+
+<FormControl className={classes.formControl}>
+<InputLabel htmlFor="select-multiple-checkbox">Artists</InputLabel>
+<Select 
+multiple input={<Input id="select-multiple-checkbox" />}
+/* above value of property is another component */
+renderValue={selected => selected.join(',')}
+value={this.state.artists}
+onChange={this.artistSelectHandler} 
+>
+
+{/* creating each check-box item iteratively,by iterating genres list */}
+<MenuItem value="0">None</MenuItem>
+{artists.map(artist => (
+<MenuItem key={artist.id} value={artist}>                            {/* complete artist object gets sent as event, to event change handler */}
+    <Checkbox checked={this.state.artists.indexOf(artist.first_name) > -1}/>
+    <ListItemText primary={artist.first_name+" "+ artist.last_name}/>
+    </MenuItem>
+
+))}
+</Select>
+</FormControl>
 
 
 
